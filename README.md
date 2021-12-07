@@ -7,8 +7,20 @@ This script downloads the latest Cardano's relays list from AdaPools and measure
 
 Thanks to [Martin Lang](https://github.com/gitmachtl/scripts) for providing the base code on which this script was built.
 
-## Contacts
+## Installation
+```shell
+#Pull the script from GitHub
+mkdir -p $HOME/RTTmapper/ && cd $_
+git clone https://github.com/CardenPool/RTTmapper.git $HOME/RTTmapper
 
+#Give execution rights
+cd $HOME/RTTmapper
+chmod +x RTTmapper.sh
+
+#Execute the script
+./RTTmapper.sh
+```
+## Contacts
 * Telegram Group - [@cardenpool](https://t.me/cardenpool)<br>
 * Twitter - [@Carden_Pool](https://twitter.com/Carden_Pool)<br>
 * Email - info@cardenpool.org<br>
