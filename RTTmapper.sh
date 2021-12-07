@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# This script downloads the latest Cardano's relays list from AdaPools and measure the Round Trip Times (RTT) for each relays "peer".
+# This script downloads the latest Cardano's relays list from AdaPools and measure the Round Trip Times (RTT) for each relays (peer).
 # To verify the geo information provided by adapool.org, a further geo-location of the XX best RTT machines is done.
-# The output list is saved to a textual CSV file. This can be imported within an excel file to filter data and cherry picking
-# the relays with the best RTT for each continent/country with the aim to build up a good performing mainnet-topology.json file.
+# The output list is saved to a CSV file. This can be imported within an excel file to filter data and cherry picking the relays with
+# the best RTT for each continent/country with the aim to build up a good performing mainnet-topology.json file.
 # A good performing topology file, maximize the blocks propagation time and helps to compete in slot battles.
 #
 # Before use this script, please fully undestand how the Cardano's topology works, what "blocks propagation" is and why RTT can be
@@ -12,17 +12,17 @@
 # HOW TO USE THE SCRIPT:
 #
 #   - First, make sure you have the little helper tool 'tcptraceroute' installed. if not, the script will tells  you to install it.
-#	  This tool is needed to make a "ping" request to the open tcp port if the normal ping command fails.
+#     This tool is needed to make a "ping" request to the open tcp port if the normal ping command fails.
 #   - Set CONTINENT to retrieve the relays belonging to a specific country.
-#	- Set the SAVETOP variable to save the top XX reachable relays, geo-located within the target continent. If you have for example 500
-#	  relays from adapools.org for the continent NA (North America), the script will geo-locate (from best to worst RTT) untile collected
+#   - Set the SAVETOP variable to save the top XX reachable relays, geo-located within the target continent. If you have for example 500
+#     relays from adapools.org for the continent NA (North America), the script will geo-locate (from best to worst RTT) untile collected
 #     and saved XX relays matching the target continent.
-#	- If you wanna share a screen capture to the community but you want to hide all the IPs, set the parameter HIDEIP to YES
-#	- Enable/Disable the GeoLocation lookup for all the peers in the summary setting up the SHOWGEOINFO variable.
-#	  If disables, the script will not produce a CSV output file.
+#   - If you wanna share a screen capture to the community but you want to hide all the IPs, set the parameter HIDEIP to YES
+#   - Enable/Disable the GeoLocation lookup for all the peers in the summary setting up the SHOWGEOINFO variable.
+#     If disables, the script will not produce a CSV output file.
 #
 # You're done, just call the script:  ./pingNodes.sh
-#
+# 
 ########################################################################################################
 
 ### Get this machine public IP
