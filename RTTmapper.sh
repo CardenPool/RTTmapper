@@ -29,7 +29,7 @@
 MYIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 ### Retrieve from adapools.org the relays list of a specific country
-CONTINENT="SA" # AF(Africa) - NA(North America) - OC(Oceania) - AN(Antarctica) - AS(Asia) - EU(Europe) - SA(South America)
+CONTINENT="EU" # AF(Africa) - NA(North America) - OC(Oceania) - AN(Antarctica) - AS(Asia) - EU(Europe) - SA(South America)
 #CONTINENT="ALL" #Retrieve all the peers from AdaPool.org.
 
 ### Geo Locate best peers since XX were collected to a CSV output file
