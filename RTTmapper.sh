@@ -29,7 +29,7 @@
 MYIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 ### Retrieve from adapools.org the relays list of a specific country
-CONTINENT="EU" # AF(Africa) - NA(North America) - OC(Oceania) - AN(Antarctica) - AS(Asia) - EU(Europe) - SA(South America)
+CONTINENT="SA" # AF(Africa) - NA(North America) - OC(Oceania) - AN(Antarctica) - AS(Asia) - EU(Europe) - SA(South America)
 #CONTINENT="ALL" #Retrieve all the peers from AdaPool.org.
 
 ### Geo Locate best peers since XX were collected to a CSV output file
@@ -56,6 +56,12 @@ exists()
 {
   command -v "$1" >/dev/null 2>&1
 }
+
+#If not exists, create the directory were CSV output files are stored
+DIRECTORY="./results"
+if [ ! -d $DIRECTORY ]; then
+  mkdir ./results # Control will enter here if $DIRECTORY doesn't exist.
+fi
 
 #Compose the filename and clear its content if exists
 filename=./results/$(printf $(date '+%Y-%m-%d'))_$(printf $CONTINENT)_top$(printf $SAVETOP).csv
