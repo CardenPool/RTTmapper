@@ -50,7 +50,7 @@ SHOWGEOINFO="YES"	#Lookup each IP in the summary for Geo information (slow), def
 # ------ Don't edit below this line ------
 ########################################################################################################
 
-VERSION="0.9"
+VERSION="0.9b"
 
 exists()
 {
@@ -58,7 +58,7 @@ exists()
 }
 
 #Compose the filename and clear its content if exists
-filename=$(printf $(date '+%Y-%m-%d'))_$(printf $CONTINENT)_top$(printf $SAVETOP).csv
+filename=./results/$(printf $(date '+%Y-%m-%d'))_$(printf $CONTINENT)_top$(printf $SAVETOP).csv
 > $(echo $filename)
 
 #Check if tcptraceroute is installed
