@@ -34,7 +34,7 @@ CONTINENT="EU" # AF(Africa) - NA(North America) - OC(Oceania) - AN(Antarctica) -
 
 ### Geo Locate best peers since XX were collected to a CSV output file
 ### json.geoiplookup.io API only allows 500 request/hour! Don't run the script too often.
-SAVETOP=50		#Show, locate and save top XX relays to CSV file, default
+SAVETOP=150		#Show, locate and save top XX relays to CSV file, default
 #SAVETOP=0		#Show, locate and save ALL relay to CSV file
 
 ### Hide IPs in the summary to share a screenshot with the community
