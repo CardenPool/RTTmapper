@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# This script downloads the latest Cardano's relays list from AdaPools and measure the Round Trip Times (RTT) for each relays (peer).
-# To verify the geo information provided by adapool.org, a further geo-location of the XX best RTT machines is done.
+# This script downloads the latest Cardano's relays list from Cardano Expolorer and measure the Round Trip Times (RTT) for each relays (peer).
+# To verify the geo information provided by Cardano Explorer, a further geo-location of the XX best RTT machines is done.
 # The output list is saved to a CSV file. This can be imported within an excel file to filter data and cherry picking the relays with
 # the best RTT for each continent/country with the aim to build up a good performing mainnet-topology.json file.
 # A good performing topology file, maximize the blocks propagation time and helps to compete in slot battles.
@@ -15,7 +15,7 @@
 #     This tool is needed to make a "ping" request to the open tcp port if the normal ping command fails.
 #   - Set CONTINENT to retrieve the relays belonging to a specific country.
 #   - Set the SAVETOP variable to save the top XX reachable relays, geo-located within the target continent. If you have for example 500
-#     relays from adapools.org for the continent NA (North America), the script will geo-locate (from best to worst RTT) untile collected
+#     relays from Cardano Explorer for the continent NA (North America), the script will geo-locate (from best to worst RTT) untile collected
 #     and saved XX relays matching the target continent.
 #   - If you wanna share a screen capture to the community but you want to hide all the IPs, set the parameter HIDEIP to YES
 #   - Enable/Disable the GeoLocation lookup for all the peers in the summary setting up the SHOWGEOINFO variable.
@@ -28,9 +28,9 @@
 ### Get this machine public IP
 MYIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
-### Retrieve from adapools.org the relays list of a specific country
-CONTINENT="EU" # AF(Africa) - NA(North America) - OC(Oceania) - AN(Antarctica) - AS(Asia) - EU(Europe) - SA(South America)
-#CONTINENT="ALL" #Retrieve all the peers from AdaPool.org.
+### Retrieve from Cardano Explorer the relays list of a specific country
+CONTINENT="Europe" # This is case sensitive. List: "Africa" - "North America" - "Oceania" - "Asia" - "Europe" - "South America" - "Antartica"
+#CONTINENT="ALL" #Retrieve all the peers from Cardano Explorer.
 
 ### Geo Locate best peers since XX were collected to a CSV output file
 ### json.geoiplookup.io API only allows 500 request/hour! Don't run the script too often.
@@ -50,7 +50,7 @@ SHOWGEOINFO="YES"	#Lookup each IP in the summary for Geo information (slow), def
 # ------ Don't edit below this line ------
 ########################################################################################################
 
-VERSION="0.9b"
+VERSION="1.1"
 
 exists()
 {
@@ -102,15 +102,16 @@ uniqPeers=()
 netstatPeers=()
 savedCNT=()
 
-#Retrieve the latest topology throught adapool API
+#Retrieve the latest topology throught Cardano Explorer API
 echo
-echo -e "-------- Pulling relays list from adapools.org for county code (${CONTINENT})... --------"
+echo -e "-------- Pulling relays list from Cardano Explorer for county code (${CONTINENT})... --------"
 echo
 
 if [[ $CONTINENT == "ALL" ]]; then
-   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://a.adapools.org/topology") #?limit=35&continent=eu")
+   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json")
 else
-   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://a.adapools.org/topology?continent=${CONTINENT}") #&limit=10")
+   #Filter relays over continent belonging
+   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json" | jq --arg CONTINENT $CONTINENT -r 'del(.Producers[] | select (.continent!=$CONTINENT))')
 fi
 
 echo
@@ -118,6 +119,7 @@ echo -e " ----------------------------------------------------------------------
 
 #Delete the public IP of this machine from the list and adjust json in a correct format
 uniqPeers=$(echo "${content}"| jq --arg MYIP $MYIP -r 'del(.Producers[] | select (.addr==$MYIP))' | jq -r '.Producers[] | "\(.addr):\(.port) "')
+
 # (to test) consider only unique values
 # uniqPeers=$(echo "${content}"| jq --arg MYIP $MYIP -r 'del(.Producers[] | select (.addr==$MYIP))' | jq -r '.Producers[] | "\(.addr):\(.port) "' | jq 'unique_by(.addr)' )
 
