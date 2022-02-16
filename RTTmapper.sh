@@ -115,7 +115,7 @@ if [[ $CONTINENT == "ALL" ]]; then
    content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json")
 else
    #Filter relays over continent belonging
-   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json" | jq --arg TARGET_CONTINENT $TARGET_CONTINENT -r 'del(.Producers[] | select (.continent!=$TARGET_CONTINENT))')
+   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json" | jq --arg TARGET_CONTINENT "$TARGET_CONTINENT" -r 'del(.Producers[] | select (.continent!=$TARGET_CONTINENT))')
 fi
 
 echo
