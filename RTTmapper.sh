@@ -29,8 +29,12 @@
 MYIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 ### Retrieve from Cardano Explorer the relays list of a specific country
-CONTINENT="Europe" # This is case sensitive. List: "Africa" - "North America" - "Oceania" - "Asia" - "Europe" - "South America" - "Antartica"
+declare -A continents_list=( ["EU"]="Europa" ["AF"]="Africa" ["NA"]="North America" ["OC"]="Oceania" ["AS"]="Asia" ["SA"]="South America" ["AN"]="Antartica")
+CONTINENT="AS" # Use the country code or "ALL" for a complete list
 #CONTINENT="ALL" #Retrieve all the peers from Cardano Explorer.
+
+#Translate continent code to extended textual name
+TARGET_CONTINENT=${continents_list[$CONTINENT]}
 
 ### Geo Locate best peers since XX were collected to a CSV output file
 ### json.geoiplookup.io API only allows 500 request/hour! Don't run the script too often.
@@ -50,7 +54,7 @@ SHOWGEOINFO="YES"	#Lookup each IP in the summary for Geo information (slow), def
 # ------ Don't edit below this line ------
 ########################################################################################################
 
-VERSION="1.1"
+VERSION="1.0"
 
 exists()
 {
@@ -111,7 +115,7 @@ if [[ $CONTINENT == "ALL" ]]; then
    content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json")
 else
    #Filter relays over continent belonging
-   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json" | jq --arg CONTINENT $CONTINENT -r 'del(.Producers[] | select (.continent!=$CONTINENT))')
+   content=$(curl -X GET -H "Content-type: application/json" -H "Accept: application/json" "https://explorer.mainnet.cardano.org/relays/topology.json" | jq --arg TARGET_CONTINENT $TARGET_CONTINENT -r 'del(.Producers[] | select (.continent!=$TARGET_CONTINENT))')
 fi
 
 echo
