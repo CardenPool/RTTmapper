@@ -8,7 +8,7 @@ This script downloads the latest Cardano's relays list from Cardano Scanner and 
 Thanks to [Martin Lang](https://github.com/gitmachtl/scripts) for providing the base code on which this script was built.
 
 ## Installation
-#### Install and run the script
+#### Install the script
 ```shell
 #Pull the script from GitHub
 mkdir -p $HOME/RTTmapper/ && cd $_
@@ -17,9 +17,14 @@ git clone https://github.com/CardenPool/RTTmapper.git $HOME/RTTmapper
 #Give execution rights
 cd $HOME/RTTmapper
 chmod +x RTTmapper.sh
-
-#Execute the script
+```
+#### Run the script
+```shell
+#Edit the script and set the target "CONTINENT" country code
+nano RTTmapper.sh
+#Run the script to map the given country
 ./RTTmapper.sh
+#Suggestion: To build a complete list, iterate the edit and run phase for each country  
 ```
 #### Update to latest release
 ```shell
