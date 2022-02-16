@@ -22,15 +22,15 @@
 #     If disables, the script will not produce a CSV output file.
 #
 # You're done, just call the script:  ./pingNodes.sh
-# 
+#
 ########################################################################################################
 
 ### Get this machine public IP
 MYIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 ### Retrieve from Cardano Explorer the relays list of a specific country
-declare -A continents_list=( ["EU"]="Europa" ["AF"]="Africa" ["NA"]="North America" ["AS"]="Asia" ["SA"]="South America" ["AN"]="Antartica" ["OC"]="Oceania")
-CONTINENT="EU" # Use the country code or "ALL" for a complete list (EU, AF, NA, AS, SA, AN, OC)
+declare -A continents_list=(["EU"]="Europe" ["AF"]="Africa" ["NA"]="North America" ["AS"]="Asia" ["SA"]="South America" ["AN"]="Antartica" ["OC"]="Oceania")
+CONTINENT="EU" #Use the country code or ALL for a complete list (EU, AF, NA, AS, SA, AN, OC)
 #CONTINENT="ALL" #Retrieve all the peers from Cardano Explorer.
 
 #Translate continent code to extended textual name
