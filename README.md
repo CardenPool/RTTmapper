@@ -22,6 +22,8 @@ chmod +x RTTmapper.sh
 ```shell
 #Edit the script and set the target "CONTINENT" country code
 nano RTTmapper.sh
+```
+```shell
 #Run the script to map the given country
 ./RTTmapper.sh
 #Suggestion: To build a complete list, iterate the edit and run phase for each country  
