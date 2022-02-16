@@ -29,8 +29,8 @@
 MYIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 ### Retrieve from Cardano Explorer the relays list of a specific country
-declare -A continents_list=( ["EU"]="Europa" ["AF"]="Africa" ["NA"]="North America" ["OC"]="Oceania" ["AS"]="Asia" ["SA"]="South America" ["AN"]="Antartica")
-CONTINENT="EU" # Use the country code or "ALL" for a complete list
+declare -A continents_list=( ["EU"]="Europa" ["AF"]="Africa" ["NA"]="North America" ["AS"]="Asia" ["SA"]="South America" ["AN"]="Antartica" ["OC"]="Oceania")
+CONTINENT="EU" # Use the country code or "ALL" for a complete list (EU, AF, NA, AS, SA, AN, OC)
 #CONTINENT="ALL" #Retrieve all the peers from Cardano Explorer.
 
 #Translate continent code to extended textual name
