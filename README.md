@@ -5,6 +5,10 @@ This is a small script made available for all Cardano's Stake Pool Operators (SP
 <img src="https://www.cardenpool.org/wp-content/uploads/2021/12/mesh_topology.gif" align="right" border=0>
 This script downloads the latest Cardano's relays list from Cardano Scanner and measure the Round Trip Times (RTT) for each relay (peer). To verify the geo information provided by Cardano Scanner, a further geo-location of the XX best RTT machines is done. The output list is saved to a CSV file. This can be imported within an excel file to filter data and cherry picking the relays with the best RTT for each continent/country with the aim to build up a good performing mainnet-topology.json file. A good performing topology file, maximize the blocks propagation time and helps to compete in slot battles. Before use this script, please fully undestand how the Cardano's topology works, what "blocks propagation" is and why RTT can be crucial in a slot height battle.
 
+## Example output
+This picture shows the RTT from Milan to relays belonging to the Africa country (selected by the script configuration). The script order the relays (from smaller to bigger RTT) and generates output textual files.
+![RTT AF](https://github.com/CardenPool/RTTmapper/assets/86101039/d33d2ebd-1c22-43ae-ab4c-9d89415a41d0)
+
 Thanks to [Martin Lang](https://github.com/gitmachtl/scripts) for providing the base code on which this script was built.
 
 ## Installation
