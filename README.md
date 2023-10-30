@@ -7,7 +7,7 @@ This script downloads the latest Cardano's relays list from Cardano Scanner and 
 
 ## Example output
 This picture shows the RTT from Milan to relays belonging to the Africa country (selected by the script configuration). The script order the relays (from smaller to bigger RTT) and generates output textual files.
-![RTT AF](https://github.com/CardenPool/RTTmapper/assets/86101039/d33d2ebd-1c22-43ae-ab4c-9d89415a41d0)
+![RTT IT AF](https://github.com/CardenPool/RTTmapper/assets/86101039/2b615521-5587-457c-8d6f-61327ff86203)
 
 Thanks to [Martin Lang](https://github.com/gitmachtl/scripts) for providing the base code on which this script was built.
 
